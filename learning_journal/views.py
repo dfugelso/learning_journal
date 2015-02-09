@@ -23,6 +23,8 @@ from .models import (
 from .forms import LoginForm
 
 
+from jinja2 import Markup
+import markdown
 
 # @view_config(route_name='home', renderer='templates/mytemplate.pt')
 # def my_view(request):
@@ -99,3 +101,9 @@ def sign_in_out(request):
         headers = forget(request)
     return HTTPFound(location=request.route_url('home'), headers=headers)
 
+def render_markdown(content):
+    '''
+    render markup on user entry views.
+    '''
+    output = Markup(markdown.markdown(content))
+    return output
